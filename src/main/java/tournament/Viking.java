@@ -9,7 +9,7 @@ public class Viking extends Challenger implements ChallengerInterface {
 	public Viking() {
 		super();
 		this.hitPoints = 120;
-		this.equip("handAxe");
+		this.equip("axe");
 
 	}
 	
@@ -19,7 +19,7 @@ public class Viking extends Challenger implements ChallengerInterface {
 		case "buckler":
 			this.equipment.put(equipmentPiece, new Equipment(3, 1));
 			break;
-		case "handAxe":
+		case "axe":
 			this.damage = 6;
 			this.equipment.put(equipmentPiece, new Equipment(1, 1));
 			break;

@@ -4,17 +4,33 @@ import tournament.util.Equipment;
 
 public class Highlander extends Challenger implements ChallengerInterface {
 
+	private final int initialHitPoints = 150;
 	private int damage;
+	private boolean isVeteran; 
+	private boolean isBerserk;
 	
 	public Highlander() {
 		super();
-		this.hitPoints = 100;
+		this.hitPoints = initialHitPoints;
 		this.equip("greatSword");
+	}
+	
+	public Highlander(String type) {
+		super();
+		this.hitPoints = initialHitPoints;
+		this.equip("greatSword");
+		if (type.equals("Veteran")) {
+			this.isVeteran = true;
+		}
 	}
 
 	@Override
 	public void engage(Challenger challenged) {
 		while (this.hitPoints > 0 && challenged.hitPoints > 0) {
+			if (isVeteran && !isBerserk && hitPoints < initialHitPoints * 0.3) {
+				isBerserk = true;
+				damage *= 2;
+			}
 			attack(challenged, damage);
 		}
 	}

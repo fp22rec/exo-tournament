@@ -20,9 +20,11 @@ public class Equipment {
 		this.hp -= amount;
 	}
 
-	public boolean tryUse() {
+	public boolean tryUse(boolean recover) {
 		if (activeStatus == 0) {
-			activeStatus = activeAmount;
+			if (recover) {
+				activeStatus = activeAmount;
+			}
 			return false;
 		} else {
 			activeStatus--;
