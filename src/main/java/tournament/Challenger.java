@@ -40,7 +40,10 @@ public abstract class Challenger implements ChallengerInterface {
 					this.equipment.remove("buckler");
 				}
 			}
-			
+		}
+		
+		if (this.equipment.containsKey("armor")) {
+			damageAttacker -= 3;
 		}
 		
 		this.hitPoints = Math.max(0, this.hitPoints - damageAttacker);

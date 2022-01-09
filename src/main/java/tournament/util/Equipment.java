@@ -6,10 +6,10 @@ public class Equipment {
 	private int activeAmount;
 	private int activeStatus;
 
-	public Equipment(int hp, int blockAmount) {
+	public Equipment(int hp, int activeAmount) {
 		this.hp = hp;
-		this.activeAmount = blockAmount;
-		this.activeStatus = blockAmount;
+		this.activeAmount = activeAmount;
+		this.activeStatus = activeAmount;
 	}
 
 	public int getHp() {

@@ -4,7 +4,7 @@ import tournament.util.Equipment;
 
 public class Viking extends Challenger implements ChallengerInterface {
 
-	private final int damage = 6;
+	private int damage;
 	
 	public Viking() {
 		super();
@@ -20,6 +20,7 @@ public class Viking extends Challenger implements ChallengerInterface {
 			this.equipment.put(equipmentPiece, new Equipment(3, 1));
 			break;
 		case "handAxe":
+			this.damage = 6;
 			this.equipment.put(equipmentPiece, new Equipment(1, 1));
 			break;
 		}
