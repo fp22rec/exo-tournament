@@ -1,12 +1,19 @@
 package tournament;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
+
+import tournament.util.Equipment;
 
 public abstract class Challenger implements ChallengerInterface {
 
 	int hitPoints;
-	List<String> equipment;
+	Map<String, Equipment> equipment;
 	
+	public Challenger() {
+		this.equipment = new HashMap<>();
+	}
+
 	@Override
 	public int hitPoints() {
 		return hitPoints;
@@ -14,15 +21,29 @@ public abstract class Challenger implements ChallengerInterface {
 	
 	@Override
 	public void attack(Challenger challenged, int damage) {
-		challenged.takeHit(damage);
-		if (challenged.hitPoints > 0) {
-			challenged.engage(this);
-		}
+		challenged.takeHit(equipment, damage);
+		challenged.engage(this);
 	}
 	
 	@Override
-	public void takeHit(int damage) {
-		this.hitPoints = Math.max(0, this.hitPoints - damage);
+	public void takeHit(Map<String, Equipment> equipmentAttacker, int damageAttacker) {
+		if (this.equipment.containsKey("buckler")) {
+			Equipment buckler = this.equipment.get("buckler");
+			
+			// block damage one out of two
+			boolean blocked = buckler.tryUse();
+			damageAttacker = blocked ? 0 : damageAttacker;
+			
+			if (blocked && equipmentAttacker.containsKey("handAxe")) {
+				buckler.decreaseHp(1);
+				if (buckler.getHp() == 0) {
+					this.equipment.remove("buckler");
+				}
+			}
+			
+		}
+		
+		this.hitPoints = Math.max(0, this.hitPoints - damageAttacker);
 	}
 	
 }
